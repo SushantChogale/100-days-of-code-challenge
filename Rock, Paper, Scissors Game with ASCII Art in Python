@@ -1,0 +1,54 @@
+import random
+# ASCII art for rock, paper, and scissors
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+# Create a list for the game options
+game_options = [rock, paper, scissors]
+# Record user input
+user_choice = int(input(" please enter 0 for rock, 1 for Paper, 2 for Scissors\n"))
+# Check if user input is valid
+if user_choice >= 3 or user_choice < 0:
+    print("you choose invalid number, you loose")
+else:
+    print(f"You Chose : {game_options[user_choice]}")
+# Record computer's choice using the random package
+    computer_choice = random.randint(0,2)
+    print(f"Computer Chose : {game_options[computer_choice]}")
+# Compare user and computer choices to determine the winner
+    if computer_choice > user_choice:
+        print("you loose")
+    elif computer_choice == 2 and user_choice == 0:
+        print("you Win")
+    elif computer_choice < user_choice:
+        print("you Win")
+    elif computer_choice == 0 and user_choice == 2:
+        print("you Loose")
+    elif computer_choice == user_choice:
+        print("Game is draw")
+
+
+
