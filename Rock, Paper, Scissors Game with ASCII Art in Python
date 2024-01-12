@@ -32,7 +32,7 @@ game_options = [rock, paper, scissors]
 user_choice = int(input(" please enter 0 for rock, 1 for Paper, 2 for Scissors\n"))
 # Check if user input is valid
 if user_choice >= 3 or user_choice < 0:
-    print("you choose invalid number, you loose")
+    print("you choose invalid number, you lost")
 else:
     print(f"You Chose : {game_options[user_choice]}")
 # Record computer's choice using the random package
@@ -40,13 +40,13 @@ else:
     print(f"Computer Chose : {game_options[computer_choice]}")
 # Compare user and computer choices to determine the winner
     if computer_choice > user_choice:
-        print("you loose")
+        print("you Lost")
     elif computer_choice == 2 and user_choice == 0:
         print("you Win")
     elif computer_choice < user_choice:
         print("you Win")
     elif computer_choice == 0 and user_choice == 2:
-        print("you Loose")
+        print("you Lost")
     elif computer_choice == user_choice:
         print("Game is draw")
 
