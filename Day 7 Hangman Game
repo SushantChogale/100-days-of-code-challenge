@@ -1,0 +1,87 @@
+import random
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+fruits = ["apple", "pineapple", "watermelon", "muskmelon", "jackfruit", "dragonfruit", "avocado", "mango"]
+
+chosen_word = random.choice(fruits)
+display = []
+for _ in range(0, len(chosen_word)):
+    display += "_"
+print(display)
+end_of_game = False
+lives = 6
+while not end_of_game:
+
+    guess = input(f"guess a letter: ").lower()
+
+    for position in range(0, len(chosen_word)):
+        letter = chosen_word[position]
+        if guess == letter:
+            display[position] = letter
+    if guess not in chosen_word:
+        lives -= 1
+        if lives == 0:
+            end_of_game = True
+            print("You lose")
+            print(f"it was {chosen_word}")
+    print(display)
+
+    if "_" not in display:
+        end_of_game = True
+
+    print(stages[lives])
