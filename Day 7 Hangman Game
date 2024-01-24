@@ -1,4 +1,7 @@
+# Step 1: Import the `random` module
 import random
+
+# Step 2: Define the hangman stages as ASCII art in a list
 stages = ['''
   +---+
   |   |
@@ -56,32 +59,45 @@ stages = ['''
 =========
 ''']
 
+# Step 3: Define a list of fruits
 fruits = ["apple", "pineapple", "watermelon", "muskmelon", "jackfruit", "dragonfruit", "avocado", "mango"]
 
+# Step 4: Randomly choose a word from the list of fruits
 chosen_word = random.choice(fruits)
-display = []
-for _ in range(0, len(chosen_word)):
-    display += "_"
+
+# Step 5: Initialize the display list with underscores for each letter in the chosen word
+display = ["_" for _ in range(len(chosen_word))]
 print(display)
+
+# Step 6: Initialize game variables
 end_of_game = False
 lives = 6
+
+# Step 7: Start the game loop
 while not end_of_game:
+    # Step 8: Get user input for a guessed letter
+    guess = input("Guess a letter: ").lower()
 
-    guess = input(f"guess a letter: ").lower()
-
-    for position in range(0, len(chosen_word)):
+    # Step 9: Check if the guessed letter is in the chosen word
+    for position in range(len(chosen_word)):
         letter = chosen_word[position]
         if guess == letter:
             display[position] = letter
+
+    # Step 10: Reduce lives if the guessed letter is not in the chosen word
     if guess not in chosen_word:
         lives -= 1
         if lives == 0:
             end_of_game = True
             print("You lose")
-            print(f"it was {chosen_word}")
+            print(f"It was {chosen_word}")
+
+    # Step 11: Display the current state of the word
     print(display)
 
+    # Step 12: Display the current hangman stage
+    print(stages[lives])
+
+    # Step 13: Check if the word has been completely guessed
     if "_" not in display:
         end_of_game = True
-
-    print(stages[lives])
