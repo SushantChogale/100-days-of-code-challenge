@@ -1,0 +1,43 @@
+def add(a, b):
+    return a + b
+
+
+def sub(a, b):
+    return a - b
+
+
+def mul(a, b):
+    return a * b
+
+
+def div(a, b):
+    return a / b
+
+
+operations = {"+": add,
+              "-": sub,
+              "*": mul,
+              "/": div}
+
+
+def calculator():
+    input1 = float(input("what is the first number?\n"))
+
+    for symbol in operations:
+        print(symbol)
+    should_continue = True
+
+    while should_continue:
+
+        choose_symbol = input("Please pick an operation\n")
+        input2 = float(input("please enter number?\n"))
+        calculation_function = operations[choose_symbol]
+        answer = calculation_function(input1, input2)
+        print(f"{input1}{choose_symbol}{input2}={answer}")
+        if input(f"please type  yes to continue caculating with {answer}, or  type no to start a new calculation\n") == "yes":
+            input1 = answer
+        else:
+            should_continue = False
+            calculator()
+
+calculator()
