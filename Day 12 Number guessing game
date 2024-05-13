@@ -1,0 +1,51 @@
+import random
+
+
+def game():
+    num_list = []
+    for num in range(1, 101):
+        num_list.append(num)
+
+    chosen_number = random.choice(num_list)
+    level = input("Please select difficulty between Hard or Easy\n").lower()
+
+    easy_guess = 0
+    hard_guess = 0
+
+    def check():
+        if user_input > chosen_number:
+            print("it is less than what you have guessed it")
+        elif user_input < chosen_number:
+            print("it is more than what you have guessed it")
+        elif easy_guess == 10:
+            print(f"you have use all your chances, the number was {chosen_number}")
+
+    if level == "easy":
+
+        while easy_guess != 10:
+            user_input = int(input("please guess a number\n"))
+            if user_input != chosen_number:
+                easy_guess += 1
+                check()
+            elif user_input == chosen_number:
+                print(f"You won the number is {chosen_number}")
+                break
+        if easy_guess == 10:
+            print(f"you have use all your chances, the number was {chosen_number}")
+    elif level == "hard":
+        while hard_guess != 5:
+            user_input = int(input("please guess a number\n"))
+            if user_input != chosen_number:
+                hard_guess += 1
+                check()
+            elif user_input == chosen_number:
+                print("You_won")
+                break
+        if hard_guess == 5:
+            print(f"you have use all your chances, the number was {chosen_number}")
+
+
+start = input("To play press Y else N to exit\n").lower()
+
+while start == "y":
+    game()
