@@ -319,16 +319,16 @@ def check(x, y):
             score += 1
             x = x
             y = random.choice(data)
-            if x == y:
+            while x == y:
                 y = random.choice(data)
 
         elif guess == 'b' and x['follower_count'] <= y['follower_count']:
             print("Right")
             print(f"{x['name']} have {x['follower_count']} and {y['name']} have {y['follower_count']} ")
             score += 1
-            y = y
-            x = random.choice(data)
-            if x == y:
+            y = x
+            y = random.choice(data)
+            while y == x:
                 x = random.choice(data)
 
 
