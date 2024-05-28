@@ -1,0 +1,127 @@
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+
+
+def cost(drink):
+    price = MENU[drink]['cost']
+    return price
+
+
+def ingredients(drink):
+    water = MENU[drink]['ingredients']['water']
+    milk = MENU[drink]['ingredients'].get('milk', 0)
+    coffee = MENU[drink]['ingredients']['coffee']
+    return water, milk, coffee
+
+
+def choices(x):
+    print(f"please pay {cost(x)}£")
+    print(f"please type in number of coins you have:")
+
+    money = counter()
+    if money == cost(x):
+        update_resources(x)
+        print("here is your coffee enjoy")
+    elif money > cost(x):
+        update_resources(x)
+        change = float(round(money - cost(x), 2))
+        print(f"here is your change{change}")
+        print("here is your coffee enjoy")
+    else:
+        print(f"here is your money back {money}$")
+
+
+def counter():
+    # calculate coins inserted
+    p1 = float(input("0.01 = "))
+    p2 = float(input("0.02 = "))
+    p5 = float(input("0.05 = "))
+    p10 = float(input("0.10 = "))
+    p20 = float(input("0.20 = "))
+    p50 = float(input("0.50 = "))
+    pound1 = int(input("1.0 = "))
+    pound2 = int(input("2.0 = "))
+
+    total = (p1 * 0.01 + p2 * 0.02 + p5 * 0.05 + p10 * 0.10 + p20 * 0.20 + p50 * 0.50 + pound1 * 1.0 + pound2 * 2.0)
+    print(round(total,2))
+    return total
+
+
+def update_resources(drink):
+    water, milk, coffee = ingredients(drink)
+    resources["water"] -= water
+    resources["milk"] -= milk
+    resources["coffee"] -= coffee
+
+
+def check_resources(drink):
+    water, milk, coffee = ingredients(drink)
+    if resources["water"] < water:
+        print("Sorry, not enough water.")
+        return False
+    if resources["milk"] < milk:
+        print("Sorry, not enough milk.")
+        return False
+    if resources["coffee"] < coffee:
+        print("Sorry, not enough coffee.")
+        return False
+    return True
+
+
+def coffee_machine():
+    switch = "on"
+
+    while switch:
+        customers_choice = input("What would you like? (espresso/latte/cappuccino):\n")
+        if customers_choice == "espresso":
+            if check_resources(customers_choice):
+                choices(customers_choice)
+        elif customers_choice == "latte":
+            if check_resources(customers_choice):
+                choices(customers_choice)
+        elif customers_choice == "cappuccino":
+            if check_resources(customers_choice):
+                choices(customers_choice)
+        elif customers_choice == "report":
+            print(f"Water: {resources['water']}")
+            print(f"Milk: {resources['milk']}")
+            print(f"Coffee: {resources['coffee']}")
+        elif customers_choice == "off":
+            switch = False
+            print("machine is currently off")
+            while True:
+                customers_choice = input("To start the machine type on\n").lower()
+                if customers_choice == "on":
+                    switch = True
+                    break
+
+coffee_machine()
